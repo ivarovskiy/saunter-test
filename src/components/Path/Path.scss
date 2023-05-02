@@ -1,0 +1,29 @@
+.path {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: grey;
+
+  .logo {
+    margin: 10px;
+  }
+
+  &--content {
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10px;
+
+    .title {
+    }
+
+    .description {
+    }
+  }
+
+  .range {
+    margin-right: 10px;
+  }
+
+  .arrow {
+  }
+}
