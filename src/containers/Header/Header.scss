@@ -1,0 +1,21 @@
+.header {
+  padding-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+
+  border-bottom: 1px solid black;
+
+  .name {
+    margin-left: 10px;
+    font-family: Roboto;
+    font-size: 20px;
+
+    &--container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
