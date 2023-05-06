@@ -9,7 +9,7 @@ interface Props {
 const Marker: React.FC<Props> = ({ position }) => {
   return (
     <div className="marker">
-      <GoogleMapMarker position={position} icon={{url: './map-marker.svg'}} />
+      <GoogleMapMarker position={position} icon={{ url: './map-marker.svg' }} />
     </div>
   );
 };

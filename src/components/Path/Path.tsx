@@ -2,13 +2,25 @@ import * as React from 'react';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './Path.scss';
+import { PathI } from '../../models/Path';
+import { observer } from 'mobx-react';
+import StarIcon from '@mui/icons-material/Star';
+import { IconButton } from '@mui/material';
+import { useContext } from 'react';
+import { MyContext } from '../../containers/Content/MyContext';
 
-const Path: React.FC = () => {
-  const path = {
-    title: 'Path title',
-    description: 'Short description...',
-    range: '1,75',
+interface Props {
+  path: PathI;
+}
+
+const Path: React.FC<Props> = ({ path }) => {
+  const { value, setValue } = useContext(MyContext);
+
+  const handleClick = () => {
+    console.log('pathId', path.id);
+    setValue(path.id);
   };
+
   return (
     <div className="path">
       <div className="logo">
@@ -16,20 +28,21 @@ const Path: React.FC = () => {
       </div>
       <div className="path--content">
         <div className="title">
+          {path.isFavorite ? (
+            <div className="favorite">
+              <StarIcon color="primary" />
+            </div>
+          ) : null}
           {path.title}
         </div>
-        <div className="description">
-          {path.description}
-        </div>
+        <div className="description">{path.shortDescription}</div>
       </div>
-      <div className="range">
-        {path.range}
-      </div>
-      <div className="arrow">
+      <div className="range">{path.range}</div>
+      <IconButton onClick={handleClick}>
         <ArrowForwardIosIcon fontSize="small" />
-      </div>
+      </IconButton>
     </div>
   );
 };
 
-export default Path;
+export default observer(Path);

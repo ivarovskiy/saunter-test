@@ -1,15 +1,16 @@
 import * as React from 'react';
 import Search from '../../components/Search/Search';
-import Path from '../../components/Path/Path';
+import PathList from '../PathList/PathList';
+import { observer } from 'mobx-react';
+import './SideBar.scss';
 
 const SideBar:React.FC = () => {
     return ( 
         <div className="sidebar">
-            SideBar
             <Search />
-            <Path />
+            <PathList />
         </div>
     );
 }
 
-export default SideBar;
+export default observer(SideBar);

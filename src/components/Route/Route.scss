@@ -1,0 +1,41 @@
+.container {
+  min-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.route {
+  margin-left: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &--header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  &--body {
+    margin: 10px 0 10px 0;
+
+    .full-description {
+      color: var(--secondary-text-color);
+      letter-spacing: 0.4px;
+    }
+
+    .map {
+      position: relative;
+      margin-top: 10px;
+    }
+  }
+
+  &--footer {
+    display: flex;
+    justify-content: flex-start;
+  }
+}

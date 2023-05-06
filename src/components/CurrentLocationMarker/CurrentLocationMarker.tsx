@@ -1,5 +1,5 @@
+import { Marker } from '@react-google-maps/api';
 import * as React from 'react';
-import { Marker as GoogleMapMarker } from '@react-google-maps/api';
 import { Coordinates } from '../../models/Map';
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
 
 const CurrentLocationMarker: React.FC<Props> = ({ position }) => {
   return (
-    <div className="marker">
-      <GoogleMapMarker position={position} icon={{url: './map-marker.svg'}} />
-    </div>
+    <Marker
+      position={position}
+      icon={{ url: '/aboba.svg' }}
+    />
   );
 };
 

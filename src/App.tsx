@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './containers/Header/Header';
 import Content from './containers/Content/Content';
+import { observer } from 'mobx-react';
 
 const App: React.FC = ()  => {
   return (
@@ -12,4 +13,4 @@ const App: React.FC = ()  => {
   );
 }
 
-export default App;
+export default observer(App);

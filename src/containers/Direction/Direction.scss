@@ -1,7 +1,11 @@
+.direction {
+    position: relative;
+}
+
 .address-search {
-    padding: 10px;
     width: 100%;
-    max-width: 700px;
+    min-width: 600px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,3 +13,19 @@
     position: absolute;
     z-index: 10;
 }
+
+.button {
+    position: relative;
+
+    &--group {
+        :nth-child(2n) {
+            margin-left: 10px;
+        }
+
+        .add {
+            // right: 10px;
+        }
+        
+    }
+}
+

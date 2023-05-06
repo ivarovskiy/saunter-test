@@ -1,8 +1,12 @@
 .path {
+  border-radius: 4px;
+  box-shadow: var(--main-bg-shadow);
+  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: grey;
+  justify-content: space-between;
+  background-color: var(--main-bg-color);
 
   .logo {
     margin: 10px;
@@ -14,9 +18,14 @@
     margin-right: 10px;
 
     .title {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
     }
 
     .description {
+      font-size: 14px;
+      color: var(--secondary-text-color);
     }
   }
 
