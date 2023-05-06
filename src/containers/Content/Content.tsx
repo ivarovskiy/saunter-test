@@ -26,6 +26,7 @@ const Content: React.FC = () => {
       <Divider sx={{ height: 850, m: 0.5 }} orientation="vertical" />
       <Route pathById={pathById} />
     </div>
+    
   );
 };
 

@@ -39,6 +39,20 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
     range,
   );
 
+  const validateForm = () => {
+    const { title, shortDescription, fullDescription } = values;
+
+    if (
+      title === '' ||
+      shortDescription === '' ||
+      fullDescription === '' ||
+      range === ''
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <Form>
       <Grid container spacing={2}>
@@ -96,7 +110,7 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
             />
             <div>
               <Button
-                disabled
+                disabled={!validateForm()}
                 variant="outlined"
                 endIcon={<AddLocationIcon />}
                 onClick={handleSave}

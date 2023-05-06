@@ -7,41 +7,40 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import { ButtonGroup } from '@mui/material';
+import store from '../../store/Store';
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 
 interface Props {
   pathById: PathI | undefined;
 }
 
 const Route: React.FC<Props> = ({ pathById }) => {
-  const handleFavorite = () => {
-    console.log('add to favorite');
-  };
-
-  const handleRemoveFromFavorite = () => {
-    console.log('remove from favorite');
+  const handleFavorite = (isFavorite: boolean) => {
+    if (pathById) {
+      store.isFavorite(pathById.id, isFavorite);
+    }
   };
 
   const handleDelete = () => {
-    console.log('remove path');
+    if (pathById) {
+      store.removeFromPath(pathById.id);
+      console.log('deleted');
+    }
   };
+
   return (
     <>
       {pathById ? (
         <div className="route">
           <div className="route--header">
-            <div className="title">
-                {pathById.title}
-            </div>
-            <div className="range">
-                {pathById.range}
-            </div>
+            <div className="title">{pathById.title}</div>
+            <div className="range">{pathById.range}</div>
           </div>
           <div className="route--body">
-            <div className="full-description">
-                {pathById.fullDescription}
-            </div>
+            <div className="full-description">{pathById.fullDescription}</div>
             <div className="map">
-                <Direction />
+              <Direction />
             </div>
           </div>
           <div className="route--footer">
@@ -50,15 +49,27 @@ const Route: React.FC<Props> = ({ pathById }) => {
               aria-label="text button group"
               color="error"
             >
-              <Button color="error" startIcon={<DeleteIcon />}>
+              <Button
+                color="error"
+                startIcon={<DeleteIcon />}
+                onClick={() => handleDelete()}
+              >
                 Delete
               </Button>
               {pathById.isFavorite ? (
-                <Button color="error" endIcon={<StarBorderIcon />}>
+                <Button
+                  color="error"
+                  endIcon={<StarBorderIcon />}
+                  onClick={() => handleFavorite(true)}
+                >
                   Remove from favorite
                 </Button>
               ) : (
-                <Button color="primary" endIcon={<StarIcon />}>
+                <Button
+                  color="primary"
+                  endIcon={<StarIcon />}
+                  onClick={() => handleFavorite(false)}
+                >
                   Add to favorite
                 </Button>
               )}
@@ -72,4 +83,4 @@ const Route: React.FC<Props> = ({ pathById }) => {
   );
 };
 
-export default Route;
+export default observer(Route);
