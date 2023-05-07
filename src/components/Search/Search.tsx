@@ -5,17 +5,8 @@ import Paper from '@mui/material/Paper';
 import './Search.scss';
 import store from '../../store/Store';
 
-// interface Props {
-//   onSearch: (value: string) => void;
-// }
-
 const SearchInput: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
-
-  // function handleSubmit(event) {
-  //   event.preventDefault();
-  //   // обработка отправки формы
-  // }
 
   const handleSearch = () => {
     store.query = searchValue;
@@ -40,7 +31,7 @@ const SearchInput: React.FC = () => {
           p: '2px 4px',
           display: 'flex',
           alignItems: 'center',
-          width: 535,
+          width: '100%',
           backgroundColor: 'var(--main-bg-color)',
         }}
       >

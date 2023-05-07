@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import SideBar from '../SideBar/SideBar';
+import { SideBar } from '../SideBar';
 import './Content.scss';
 import { observer } from 'mobx-react';
-import Route from '../../components/Route/Route';
-import { Divider } from '@mui/material';
-import { MyContext, MyContextType } from './MyContext';
+import { Route }from '../../components/Route';
+import { ContentContext, ContentContextType } from './ContentContext';
 import store from '../../store/Store';
 
 const Content: React.FC = () => {
-  const [value, setValue] = useState<number>(-1);
+  const [value, setValue] = useState<string>('');
 
-  const contextValue: MyContextType = {
+  const contextValue: ContentContextType = {
     value,
     setValue,
   };
@@ -19,11 +18,9 @@ const Content: React.FC = () => {
 
   return (
     <div className="content">
-      <MyContext.Provider value={contextValue}>
+      <ContentContext.Provider value={contextValue}>
         <SideBar />
-      </MyContext.Provider>
-
-      <Divider sx={{ height: 850, m: 0.5 }} orientation="vertical" />
+      </ContentContext.Provider>
       <Route pathById={pathById} />
     </div>
     

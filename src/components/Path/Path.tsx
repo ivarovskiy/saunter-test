@@ -7,17 +7,16 @@ import { observer } from 'mobx-react';
 import StarIcon from '@mui/icons-material/Star';
 import { IconButton } from '@mui/material';
 import { useContext } from 'react';
-import { MyContext } from '../../containers/Content/MyContext';
+import { ContentContext } from '../../containers/Content/ContentContext';
 
 interface Props {
   path: PathI;
 }
 
 const Path: React.FC<Props> = ({ path }) => {
-  const { value, setValue } = useContext(MyContext);
+  const { value, setValue } = useContext(ContentContext);
 
   const handleClick = () => {
-    console.log('pathId', path.id);
     setValue(path.id);
   };
 
@@ -38,7 +37,7 @@ const Path: React.FC<Props> = ({ path }) => {
         <div className="description">{path.shortDescription}</div>
       </div>
       <div className="range">{path.range}</div>
-      <IconButton onClick={handleClick}>
+      <IconButton onClick={handleClick} className="arrow">
         <ArrowForwardIosIcon fontSize="small" />
       </IconButton>
     </div>

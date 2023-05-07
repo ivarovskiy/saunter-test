@@ -15,4 +15,4 @@ const CurrentLocationMarker: React.FC<Props> = ({ position }) => {
   );
 };
 
-export { CurrentLocationMarker };
+export default CurrentLocationMarker;

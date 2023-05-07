@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import store from '../../store/Store';
+import { Coordinates } from '../../models/Map';
+import { v4 as uuidv4 } from 'uuid';
 
 interface FormValues {
   id: number;
@@ -11,7 +13,7 @@ interface FormValues {
   isFavorite: boolean;
 }
 
-export const useForm = (initialValues: FormValues, handleClose: () => void, range: string) => {
+export const useForm = (initialValues: FormValues, handleClose: () => void, range: string, marks: Coordinates[]) => {
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,14 +25,15 @@ export const useForm = (initialValues: FormValues, handleClose: () => void, rang
   };
 
   const handleSave = () => {
-    const id = store.paths.length;
+    const id = uuidv4();
     const isFavorite = false;
   
     store.addNewPath({
       ...values,
       id,
       isFavorite,
-      range
+      range,
+      markers: marks,
     });
     handleClose();
   };

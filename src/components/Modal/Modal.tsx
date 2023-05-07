@@ -1,10 +1,8 @@
-import { Dialog, DialogTitle, IconButton, Paper } from '@mui/material';
+import { Dialog, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import * as React from 'react';
 import { observer } from 'mobx-react';
-// import Direction from '../../containers/Direction/Direction';
 import ModalForm from './ModalForm';
-// import { v4 as uuidv4 } from 'uuid';
 import { Divider } from '@mui/material';
 
 interface Props {
@@ -15,11 +13,11 @@ interface Props {
 const Modal: React.FC<Props> = ({ open, handleClose }) => {
   return (
     <Dialog
+      maxWidth={'lg'}
       className="dialog"
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-title"
-      maxWidth={'lg'}
     >
       <DialogTitle id="modal-title">Add path</DialogTitle>
       <IconButton

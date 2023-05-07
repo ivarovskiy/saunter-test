@@ -44,11 +44,9 @@ const Autocomplete: React.FC<Props> = ({ isLoaded, onSelect }) => {
 
   const handleSelect = (suggestion: Suggestion) => () => {
     const { description } = suggestion;
-    console.log('description: ', description);
 
     setValue(description, false);
     clearSuggestions();
-    console.log(description);
 
     getGeocode({ address: suggestion.description }).then((results) => {
       const { lat, lng } = getLatLng(results[0]);
@@ -84,10 +82,10 @@ const Autocomplete: React.FC<Props> = ({ isLoaded, onSelect }) => {
       );
     });
 
-    const clear = () => {
-      setValue('');
-      onSelect(defaultCenter);
-    }
+  const clear = () => {
+    setValue('');
+    onSelect(defaultCenter);
+  };
 
   useEffect(() => {
     if (isLoaded) {
@@ -99,12 +97,12 @@ const Autocomplete: React.FC<Props> = ({ isLoaded, onSelect }) => {
     <div ref={ref} className="autocomplete">
       <div>
         <Paper
+          className="autocomplete--paper"
           component="form"
           sx={{
             p: '2px 4px',
             display: 'flex',
             alignItems: 'center',
-            width: 400,
           }}
         >
           <InputBase
@@ -133,10 +131,9 @@ const Autocomplete: React.FC<Props> = ({ isLoaded, onSelect }) => {
           ) : null}
         </Paper>
       </div>
-      {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === 'OK' && <ul className="suggestion">{renderSuggestions()}</ul>}
     </div>
   );
 };
 
-export { Autocomplete };
+export default Autocomplete;

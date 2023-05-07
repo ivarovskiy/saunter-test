@@ -1,1 +1,1 @@
-export * from './CurrentLocationMarker';
+export {default as CurrentLocationMarker } from './CurrentLocationMarker';

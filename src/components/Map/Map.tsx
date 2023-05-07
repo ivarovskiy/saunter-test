@@ -5,42 +5,18 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  GoogleMap,
-  DirectionsService,
-  DirectionsRenderer,
-  Marker,
-} from '@react-google-maps/api';
+import { GoogleMap, DirectionsRenderer, Marker } from '@react-google-maps/api';
 import { Coordinates, Mode } from '../../models/Map';
-import { defaultTheme } from './Theme';
-import { CurrentLocationMarker } from '../CurrentLocationMarker';
 import './Map.scss';
-import { MyContext } from '../Modal/MyContext';
-// import { Marker } from '../Marker';
-
-const containerStyle: React.CSSProperties = {
-  minWidth: '600px',
-  minHeight: '600px',
-};
+import { ModalContext } from '../Modal/ModalContext';
+import { defaultOptions, containerStyle } from './defaulOptions';
+import { observer } from 'mobx-react';
+import store from '../../store/Store';
+import { toJS } from 'mobx';
 
 export const MODES = {
   MOVE: 0,
   SET_MARKER: 1,
-};
-
-const defaultOptions = {
-  panControl: true,
-  zoomControl: true,
-  mapTypeControl: false,
-  scaleControl: false,
-  streetViewControl: false,
-  rotateControl: false,
-  clickableIcons: false,
-  keyboardShortcuts: false,
-  scroolwheel: false,
-  disableDoubleClickZoom: true,
-  fullscreenControl: false,
-  styles: defaultTheme,
 };
 
 interface Props {
@@ -48,14 +24,23 @@ interface Props {
   mode: Mode | number;
   markers: Coordinates[];
   onMarkerAdd: (coordinates: Coordinates) => void;
+  pathById: string | undefined;
 }
 
-const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
+const Map: React.FC<Props> = ({
+  center,
+  mode,
+  markers,
+  onMarkerAdd,
+  pathById,
+}) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const mapRef = useRef<google.maps.Map | undefined>(undefined);
   const [directions, setDirections] =
     useState<google.maps.DirectionsResult | null>(null);
-  const { range, setRange } = useContext(MyContext);
+  const { range, setRange, marks, setMarks } = useContext(ModalContext);
+
+  const [m, setM] = useState<Coordinates[]>([]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -109,6 +94,7 @@ const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
         range = `${distance} m`;
       }
 
+      setMarks(markers);
       setDirections(response);
       setRange(range);
     } catch (error) {
@@ -117,6 +103,16 @@ const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
   };
 
   useEffect(() => {
+    if (pathById) {
+      const marks = store.getMarks(pathById);
+      if (marks !== undefined) {
+        markers = toJS(marks);
+        setM(markers);
+      }
+    } else {
+      setM(markers);
+    }
+
     if (markers.length >= 2) {
       const directionsServiceOptions = {
         origin: {
@@ -143,7 +139,7 @@ const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
         handleDirectionsService,
       );
     }
-  }, [markers]);
+  }, [markers, pathById]);
 
   return (
     <div className="map">
@@ -156,8 +152,7 @@ const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
         options={defaultOptions}
         onClick={onClick}
       >
-        {/* <CurrentLocationMarker position={center} /> */}
-        {markers.map((pos, index) => {
+        {m.map((pos, index) => {
           return <Marker key={index} position={pos} />;
         })}
         {directions && (
@@ -171,4 +166,4 @@ const Map: React.FC<Props> = ({ center, mode, markers, onMarkerAdd }) => {
   );
 };
 
-export { Map };
+export default observer(Map);

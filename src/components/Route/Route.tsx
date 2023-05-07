@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Route.scss';
-import Direction from '../../containers/Direction/Direction';
+import { Direction } from '../../containers/Direction';
 import { PathI } from '../../models/Path';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -9,7 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { ButtonGroup } from '@mui/material';
 import store from '../../store/Store';
 import { observer } from 'mobx-react';
-import { observable } from 'mobx';
+import { MODES } from '../Map';
 
 interface Props {
   pathById: PathI | undefined;
@@ -25,7 +25,6 @@ const Route: React.FC<Props> = ({ pathById }) => {
   const handleDelete = () => {
     if (pathById) {
       store.removeFromPath(pathById.id);
-      console.log('deleted');
     }
   };
 
@@ -40,7 +39,7 @@ const Route: React.FC<Props> = ({ pathById }) => {
           <div className="route--body">
             <div className="full-description">{pathById.fullDescription}</div>
             <div className="map">
-              <Direction />
+              <Direction isRoute={false} pathById={pathById.id} mode={MODES.MOVE}/>
             </div>
           </div>
           <div className="route--footer">

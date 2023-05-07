@@ -1,31 +1,49 @@
 .direction {
-    position: relative;
+  position: relative;
 }
 
 .address-search {
-    width: 100%;
-    min-width: 600px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    position: absolute;
-    z-index: 10;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  z-index: 10;
 }
 
 .button {
-    position: relative;
 
-    &--group {
-        :nth-child(2n) {
-            margin-left: 10px;
-        }
+  position: relative;
 
-        .add {
-            // right: 10px;
-        }
-        
+  &--group {
+    width: 100%;
+    min-width: 360px;
+    :nth-child(2n) {
+      margin-left: 10px;
     }
+  }
 }
 
+
+@media (max-width: 768px) {
+    .address-search {
+        width: 100%;
+        min-width: 300px;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        z-index: 10;
+      }
+
+      .button {
+        position: relative;
+      
+        &--group {
+          width: 100%;
+        }
+      }
+}

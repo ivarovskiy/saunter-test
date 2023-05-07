@@ -2,7 +2,7 @@ import * as React from 'react';
 import './Header.scss';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import Button from '@mui/material/Button';
-import Modal from '../../components/Modal/Modal';
+import { Modal } from '../../components/Modal';
 
 const Header: React.FC = () => {
   const [open, setOpen] = React.useState(false);

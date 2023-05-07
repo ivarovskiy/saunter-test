@@ -1,4 +1,4 @@
-import { IObservableValue, action, makeAutoObservable, observable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 import { PathI } from '../models/Path';
 import { data } from '../data/path.data';
 
@@ -10,14 +10,21 @@ class Store {
     makeAutoObservable(this);
   }
 
-  @action isFavorite(pathId: number, isFavorite: boolean) {
+  getMarks(pathId: string) {
+    const pathIndex = this.paths.findIndex((path) => path.id === pathId);
+    if (pathIndex !== -1) {
+      return this.paths[pathIndex].markers;
+    }
+  }
+
+  @action isFavorite(pathId: string, isFavorite: boolean) {
     const pathIndex = this.paths.findIndex((path) => path.id === pathId);
     if (pathIndex !== -1) {
       this.paths[pathIndex].isFavorite = !isFavorite;
     }
   }
 
-  @action removeFromPath(pathId: number) {
+  @action removeFromPath(pathId: string) {
     const pathIndex = this.paths.findIndex((path) => path.id === pathId);
     if (pathIndex !== -1) {
       this.paths.splice(pathIndex, 1);
@@ -25,7 +32,7 @@ class Store {
     }
   }
 
-  pathById(id: number): PathI | undefined {
+  pathById(id: string): PathI | undefined {
     return this.paths.find(path => path.id === id);
   }
 

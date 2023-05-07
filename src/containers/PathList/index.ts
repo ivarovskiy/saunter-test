@@ -1,1 +1,1 @@
-export * from './PathList';
+export { default as PathList } from './PathList';

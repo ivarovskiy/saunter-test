@@ -45,3 +45,14 @@
     font-weight: 300;
   }
 }
+
+@media (max-width: 768px) {
+  .autocomplete {
+    width: 280px;
+    max-width: 280px;
+
+    &--paper {
+      width: 280px;
+    }
+  }
+}

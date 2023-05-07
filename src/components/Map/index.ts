@@ -1,1 +1,1 @@
-export * from './Map';
+export { default as Map, MODES} from './Map';

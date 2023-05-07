@@ -1,12 +1,11 @@
+import { Coordinates } from "./Map";
+
 export interface PathI {
-    id: number;
+    id: string;
     title: string;
     shortDescription: string;
     fullDescription: string;
     range: string;
     isFavorite: boolean;
-    // markers: {
-    //     lat: number[],
-    //     lng: number[],
-    // };
+    markers: Coordinates[];
 }

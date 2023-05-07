@@ -1,0 +1,13 @@
+.sidebar {
+  padding-right: 10px;
+  border-right: 1px solid black;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    padding-right: 0;
+    border-right: none;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+  }
+}

@@ -6,6 +6,7 @@
 }
 
 .route {
+  position: relative;
   margin-left: 10px;
   width: 100%;
   display: flex;
@@ -24,6 +25,8 @@
     margin: 10px 0 10px 0;
 
     .full-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: var(--secondary-text-color);
       letter-spacing: 0.4px;
     }
@@ -37,5 +40,22 @@
   &--footer {
     display: flex;
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .route {
+    margin: 10px 10px 10px 0;
+    &--footer {
+      justify-content: center;
+      margin-bottom: 10px;
+    }
   }
 }

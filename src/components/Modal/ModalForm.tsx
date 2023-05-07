@@ -1,13 +1,30 @@
 import { Grid, TextField, Box } from '@mui/material';
 import * as React from 'react';
 import { Form, useForm } from './useForm';
-import Direction from '../../containers/Direction/Direction';
+import { Direction } from '../../containers/Direction';
 import Button from '@mui/material/Button';
 import AddLocationIcon from '@mui/icons-material/AddLocation';
 import './Modal.scss';
 import { styled } from '@mui/material/styles';
-import { MyContext, MyContextType } from './MyContext';
-import { useState } from 'react';
+import { ModalContext, ModalContextType } from './ModalContext';
+import { useCallback, useState } from 'react';
+import { Coordinates } from '../../models/Map';
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import { MODES } from '../../components/Map';
+import PanToolIcon from '@mui/icons-material/PanTool';
+
+const CustomGrid = styled(Grid)(() => ({
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+  },
+}));
+
+const CustomBox = styled(Box)(() => ({
+  '@media (max-width: 768px)': {
+    margin: 0,
+    width: '280px',
+  },
+}));
 
 const Item = styled(TextField)(({ theme }) => ({
   margin: theme.spacing(1),
@@ -27,16 +44,35 @@ interface Props {
 }
 
 const ModalForm: React.FC<Props> = ({ handleClose }) => {
+  const [mode, setMode] = useState(MODES.MOVE);
   const [range, setRange] = useState('');
-  const contextValue: MyContextType = {
+  const [marks, setMarks] = useState<Coordinates[]>([]);
+
+  const toogleMode = useCallback(() => {
+    switch (mode) {
+      case MODES.MOVE:
+        setMode(MODES.SET_MARKER);
+        break;
+      case MODES.SET_MARKER:
+        setMode(MODES.MOVE);
+        break;
+      default:
+        setMode(MODES.MOVE);
+    }
+  }, [mode]);
+
+  const contextValue: ModalContextType = {
     range,
     setRange,
+    marks,
+    setMarks,
   };
 
   const { values, setValues, handleInputChange, handleSave } = useForm(
     initialValues,
     handleClose,
     range,
+    marks,
   );
 
   const validateForm = () => {
@@ -55,9 +91,9 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
 
   return (
     <Form>
-      <Grid container spacing={2}>
+      <CustomGrid container spacing={2}>
         <Grid item xs={4}>
-          <Box
+          <CustomBox
             sx={{
               flexDirection: 'column',
               justifyContent: 'center',
@@ -96,7 +132,7 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
               onChange={handleInputChange}
               autoComplete="off"
               multiline
-              rows={4}
+              rows={5}
               size="medium"
             />
             <Item
@@ -121,15 +157,36 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
               >
                 Add path
               </Button>
+              <div className="add-button">
+                {mode === MODES.MOVE ? (
+                  <Button
+                    className="add"
+                    variant="outlined"
+                    startIcon={<AddLocationAltIcon />}
+                    onClick={toogleMode}
+                  >
+                    Add markers
+                  </Button>
+                ) : (
+                  <Button
+                    className="move"
+                    variant="outlined"
+                    startIcon={<PanToolIcon />}
+                    onClick={toogleMode}
+                  >
+                    Move Map
+                  </Button>
+                )}
+              </div>
             </div>
-          </Box>
+          </CustomBox>
         </Grid>
         <Grid item xs={8} className="dialog">
-          <MyContext.Provider value={contextValue}>
-            <Direction />
-          </MyContext.Provider>
+          <ModalContext.Provider value={contextValue}>
+            <Direction isRoute={true} pathById={undefined} mode={mode} />
+          </ModalContext.Provider>
         </Grid>
-      </Grid>
+      </CustomGrid>
     </Form>
   );
 };

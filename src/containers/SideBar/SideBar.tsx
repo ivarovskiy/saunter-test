@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Search from '../../components/Search/Search';
-import PathList from '../PathList/PathList';
+import { Search } from '../../components/Search';
+import { PathList } from '../PathList';
 import { observer } from 'mobx-react';
 import './SideBar.scss';
 

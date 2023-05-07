@@ -14,4 +14,4 @@ const Marker: React.FC<Props> = ({ position }) => {
   );
 };
 
-export { Marker };
+export default Marker;
