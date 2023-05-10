@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/saunter-test/static/css/main.282fc9ac.css",
+    "main.js": "/saunter-test/static/js/main.203cba43.js",
+    "index.html": "/saunter-test/index.html",
+    "main.282fc9ac.css.map": "/saunter-test/static/css/main.282fc9ac.css.map",
+    "main.203cba43.js.map": "/saunter-test/static/js/main.203cba43.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.282fc9ac.css",
+    "static/js/main.203cba43.js"
+  ]
+}
