@@ -3,12 +3,12 @@
 The application has been posted at the link [Saunter](https://ivarovskiy.github.io/saunter-test/).
 
 ## Technology Stack
-### `CRA`
-### `React`
-### `Typescript`
-### `Material UI`
-### `MobX`
-### `Firebase`
+### CRA
+### React
+### Typescript
+### Material UI
+### MobX
+### Firebase
 
 ## Libraries were used to work with the map
 ### `react-google-map-api`
