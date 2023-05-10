@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@firebase/app": "^0.9.9",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.2",
@@ -12,6 +13,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/firebase": "^3.2.1",
     "@types/googlemaps": "^3.43.3",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.25",

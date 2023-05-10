@@ -10,6 +10,11 @@
   background-color: var(--main-bg-color);
   justify-content: space-between;
 
+  &--desc {
+    display: flex;
+    flex-direction: row;
+  }
+
   .logo {
     margin-right: 10px;
   }
@@ -44,11 +49,5 @@
 
   .arrow {
     z-index: 10;
-  }
-}
-
-@media (max-width: 767px) {
-  .path {
-    justify-content: space-between;
   }
 }

@@ -68,7 +68,7 @@ const ModalForm: React.FC<Props> = ({ handleClose }) => {
     setMarks,
   };
 
-  const { values, setValues, handleInputChange, handleSave } = useForm(
+  const { values, handleInputChange, handleSave } = useForm(
     initialValues,
     handleClose,
     range,

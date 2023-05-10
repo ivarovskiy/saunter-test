@@ -12,5 +12,5 @@ export const ModalContext = createContext<ModalContextType>({
   range: '',
   setRange: () => undefined,
   marks: [],
-  setMarks: (value: Coordinates[]) => undefined,
+  setMarks: () => undefined,
 });

@@ -46,7 +46,7 @@ const Direction: React.FC<Props> = ({ isRoute, pathById, mode }) => {
 
   useEffect(() => {
     getBrowserLocation()
-      .then((curLoc: any) => {
+      .then((curLoc: any) => { // sorry about that
         setCenter(curLoc);
       })
       .catch((defaultLocation) => {

@@ -35,6 +35,7 @@ export const useForm = (initialValues: FormValues, handleClose: () => void, rang
       range,
       markers: marks,
     });
+
     handleClose();
   };
 
@@ -46,6 +47,6 @@ export const useForm = (initialValues: FormValues, handleClose: () => void, rang
   };
 };
 
-export const Form = (props: any) => {
+export const Form = (props: any) => { // sorry about that
   return <form>{props.children}</form>;
 };

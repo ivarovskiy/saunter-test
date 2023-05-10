@@ -36,11 +36,9 @@ const Map: React.FC<Props> = ({
 }) => {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const mapRef = useRef<google.maps.Map | undefined>(undefined);
-  const [directions, setDirections] =
-    useState<google.maps.DirectionsResult | null>(null);
-  const { range, setRange, marks, setMarks } = useContext(ModalContext);
-
-  const [m, setM] = useState<Coordinates[]>([]);
+  const [directions, setDirections] = useState<google.maps.DirectionsResult | null>(null);
+  const { setRange, setMarks } = useContext(ModalContext);
+  const [point, setPoint] = useState<Coordinates[]>([]);
 
   const onLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
@@ -107,10 +105,10 @@ const Map: React.FC<Props> = ({
       const marks = store.getMarks(pathById);
       if (marks !== undefined) {
         markers = toJS(marks);
-        setM(markers);
+        setPoint(markers);
       }
     } else {
-      setM(markers);
+      setPoint(markers);
     }
 
     if (markers.length >= 2) {
@@ -152,7 +150,7 @@ const Map: React.FC<Props> = ({
         options={defaultOptions}
         onClick={onClick}
       >
-        {m.map((pos, index) => {
+        {point.map((pos, index) => {
           return <Marker key={index} position={pos} />;
         })}
         {directions && (

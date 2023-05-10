@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Path: React.FC<Props> = ({ path }) => {
-  const { value, setValue } = useContext(ContentContext);
+  const { setValue } = useContext(ContentContext);
 
   const handleClick = () => {
     setValue(path.id);
@@ -22,24 +22,28 @@ const Path: React.FC<Props> = ({ path }) => {
 
   return (
     <div className="path">
-      <div className="logo">
-        <ZoomOutMapIcon />
-      </div>
-      <div className="path--content">
-        <div className="title">
-          {path.isFavorite ? (
-            <div className="favorite">
-              <StarIcon color="primary" />
-            </div>
-          ) : null}
-          {path.title}
+      <div className="path--desc">
+        <div className="logo">
+          <ZoomOutMapIcon />
         </div>
-        <div className="description">{path.shortDescription}</div>
+        <div className="path--content">
+          <div className="title">
+            {path.isFavorite ? (
+              <div className="favorite">
+                <StarIcon color="primary" />
+              </div>
+            ) : null}
+            {path.title}
+          </div>
+          <div className="description">{path.shortDescription}</div>
+        </div>
       </div>
-      <div className="range">{path.range}</div>
-      <IconButton onClick={handleClick} className="arrow">
-        <ArrowForwardIosIcon fontSize="small" />
-      </IconButton>
+      <div className="range">
+        {path.range}
+        <IconButton onClick={handleClick} className="arrow">
+          <ArrowForwardIosIcon fontSize="small" />
+        </IconButton>
+      </div>
     </div>
   );
 };

@@ -1,13 +1,15 @@
 import { action, makeAutoObservable } from 'mobx';
 import { PathI } from '../models/Path';
-import { data } from '../data/path.data';
+import FirebaseService from '../services/firebase/firebaseService';
 
 class Store {
+  firebaseService: FirebaseService;
   query!: string;
-  paths: PathI[] = data;
+  paths: PathI[] = [];
 
-  constructor() {
+   constructor(firebaseService: FirebaseService) {
     makeAutoObservable(this);
+    this.firebaseService = firebaseService;
   }
 
   getMarks(pathId: string) {
@@ -21,14 +23,16 @@ class Store {
     const pathIndex = this.paths.findIndex((path) => path.id === pathId);
     if (pathIndex !== -1) {
       this.paths[pathIndex].isFavorite = !isFavorite;
+      this.firebaseService.updatePath(this.paths[pathIndex]);
     }
   }
 
-  @action removeFromPath(pathId: string) {
+  @action async removeFromPath(pathId: string) {
     const pathIndex = this.paths.findIndex((path) => path.id === pathId);
     if (pathIndex !== -1) {
       this.paths.splice(pathIndex, 1);
       this.paths = [...this.paths]; // обновляем observable переменную
+      this.firebaseService.deletePath(pathId);
     }
   }
 
@@ -66,6 +70,7 @@ class Store {
   @action addNewPath(path: PathI) {
     this.paths.push(path);
     this.setPath(this.paths);
+    this.firebaseService.addPath(path);
   }
 
   setPath(payload: PathI[]) {
@@ -73,4 +78,5 @@ class Store {
   }
 }
 
-export default new Store();
+const firebaseService = new FirebaseService();
+export default new Store(firebaseService);
