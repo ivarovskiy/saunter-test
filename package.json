@@ -1,6 +1,7 @@
 {
   "name": "saunter-test-task",
   "version": "0.1.0",
+  "homepage": "https://ivarovskiy.github.io/saunter-test/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.8",
@@ -21,7 +22,6 @@
     "@types/react-dom": "^18.2.1",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
-    "antd": "^5.4.6",
     "eslint": "^8.39.0",
     "firebase": "^9.21.0",
     "mobx": "^6.9.0",
@@ -42,6 +42,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
@@ -70,6 +72,7 @@
     "@types/uuid": "^9.0.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "gh-pages": "^5.0.0",
     "onchange": "^7.1.0",
     "prettier": "^2.8.8"
   }
